@@ -6,6 +6,9 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onChatOpen }) => {
+  const phoneNumber = "+91 84337 80484";
+  const telLink = "tel:+918433780484";
+
   const handleExploreClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.getElementById('services');
@@ -39,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ onChatOpen }) => {
             Smart Solutions for Your <span className="text-blue-600">Home Appliances</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-            Professional repair services for AC, Washing Machines, Fridges, and Coolers. Reliable, fast, and affordable.
+            Professional repair services for AC, Washing Machines, Fridges, and Coolers. Reliable, fast, and affordable in Panvel & Navi Mumbai.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -49,15 +52,24 @@ const Hero: React.FC<HeroProps> = ({ onChatOpen }) => {
               className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-700 transition shadow-xl shadow-blue-200 dark:shadow-none flex items-center justify-center gap-2 group"
             >
               Explore Services
-              <i className="fas fa-arrow-right group-hover:translate-x-1 transition"></i>
             </a>
-            <button 
-              onClick={onChatOpen}
-              className="bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition shadow-lg flex items-center justify-center gap-2"
+            <a 
+              href={telLink}
+              className="bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-700 border-2 border-blue-600 dark:border-blue-500 transition shadow-lg flex items-center justify-center gap-2 active:scale-95"
             >
-              <i className="fas fa-robot text-blue-500"></i>
-              Diagnose Issue
-            </button>
+              <i className="fas fa-phone-alt"></i>
+              {phoneNumber}
+            </a>
+          </div>
+
+          <div className="mt-8 flex justify-center lg:justify-start">
+             <button 
+                onClick={onChatOpen}
+                className="text-gray-600 dark:text-gray-400 font-bold hover:text-blue-600 dark:hover:text-blue-400 transition flex items-center gap-2"
+              >
+                <i className="fas fa-robot text-blue-500"></i>
+                Try AI Diagnostic Tool
+              </button>
           </div>
 
           <div className="mt-12 flex items-center gap-6 justify-center lg:justify-start">
@@ -93,20 +105,19 @@ const Hero: React.FC<HeroProps> = ({ onChatOpen }) => {
             />
             {/* Overlay Info Card */}
             <div className="absolute bottom-6 left-6 right-6 glass p-6 rounded-2xl shadow-xl flex items-center gap-4">
-              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white shrink-0">
-                <i className="fas fa-check text-xl"></i>
+              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shrink-0">
+                <i className="fas fa-phone-alt text-xl animate-tada"></i>
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">Service Status</p>
-                <p className="text-sm md:text-lg font-extrabold text-gray-800 dark:text-white truncate">Technician Nearby</p>
+                <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">Support Line</p>
+                <p className="text-sm md:text-lg font-extrabold text-gray-800 dark:text-white truncate">{phoneNumber}</p>
               </div>
               <div className="ml-auto text-right shrink-0">
-                <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">Est. Time</p>
-                <p className="text-sm md:text-lg font-extrabold text-blue-600 dark:text-blue-400">45 Mins</p>
+                <p className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">Availability</p>
+                <p className="text-sm md:text-lg font-extrabold text-green-600 dark:text-green-400">24/7</p>
               </div>
             </div>
           </div>
-          {/* Decorative Elements */}
           <div className="absolute -top-6 -right-6 w-32 h-32 bg-yellow-400 rounded-full opacity-20 -z-10"></div>
           <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-blue-600 rounded-full opacity-10 -z-10"></div>
         </div>

@@ -11,6 +11,8 @@ import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const phoneNumber = "+91 84337 80484";
+  const telLink = "tel:+918433780484";
 
   // Force scroll to top on refresh/mount
   useEffect(() => {
@@ -36,31 +38,35 @@ const App: React.FC = () => {
             <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white rounded-full blur-[100px]"></div>
           </div>
           <div className="max-w-4xl mx-auto relative z-10">
+            <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-1.5 rounded-full text-sm font-bold mb-6 backdrop-blur-sm">
+              <i className="fas fa-exclamation-triangle"></i>
+              Emergency Repair Available
+            </div>
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6">Need Immediate Assistance?</h2>
             <p className="text-lg md:text-xl mb-10 opacity-90 max-w-2xl mx-auto">
-              Our expert technicians are available 24/7 for emergency repairs in Kalamboli & Navi Mumbai.
+              Our expert technicians are available 24/7 for emergency repairs in Kalamboli & Navi Mumbai. Speak to us directly.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <a 
-                href="https://wa.me/918433780484?text=Hi, I need a repair service for my appliance in Kalamboli / Navi Mumbai."
+                href={telLink}
+                className="bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-100 transition shadow-xl inline-flex items-center justify-center gap-3 active:scale-95"
+              >
+                <i className="fas fa-phone-alt text-xl animate-bounce"></i>
+                Call Now: {phoneNumber}
+              </a>
+              <a 
+                href="https://wa.me/918433780484?text=Hi, I need an emergency repair service."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-blue-600 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-gray-100 transition shadow-xl inline-flex items-center justify-center gap-2 group active:scale-95"
+                className="bg-green-500 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-green-600 transition shadow-xl inline-flex items-center justify-center gap-2 active:scale-95"
               >
-                <i className="fab fa-whatsapp text-2xl group-hover:scale-110 transition"></i>
-                Book via WhatsApp
+                <i className="fab fa-whatsapp text-2xl"></i>
+                WhatsApp Chat
               </a>
-              <button 
-                onClick={() => setIsChatOpen(true)}
-                className="bg-blue-800 dark:bg-blue-900 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-900 dark:hover:bg-black transition shadow-lg active:scale-95"
-              >
-                AI Diagnostic Tool
-              </button>
             </div>
           </div>
         </section>
 
-        {/* Wrapped Pricing and MapSection in sections with explicit scroll margins for consistency */}
         <section id="pricing" className="scroll-mt-20">
           <Pricing />
         </section>
@@ -84,7 +90,7 @@ const App: React.FC = () => {
                   <i className="fas fa-bolt text-3xl"></i>
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">Rapid Response</h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">Most repairs are completed within 4 hours of your initial WhatsApp request.</p>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">Most repairs are completed within 4 hours of your initial request.</p>
               </div>
               
               <div className="group p-8 rounded-3xl transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-800">

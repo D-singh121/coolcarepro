@@ -7,6 +7,10 @@ const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [theme, setTheme] = useState(localStorage.theme || 'light');
 
+  const phoneNumber = "+91 84337 80484";
+  const telLink = "tel:+918433780484";
+  const whatsappUrl = "https://wa.me/918433780484?text=Hello CoolCare Pro, I need repair assistance in Panvel/Navi Mumbai.";
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY;
@@ -19,7 +23,7 @@ const Navbar: React.FC = () => {
 
     const observerOptions = {
       root: null,
-      rootMargin: '-80px 0px -70% 0px', // Matches the navbar height exactly
+      rootMargin: '-80px 0px -70% 0px',
       threshold: 0
     };
 
@@ -59,8 +63,6 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const whatsappUrl = "https://wa.me/918433780484?text=Hello CoolCare Pro, I need repair assistance in Panvel/Navi Mumbai.";
-
   const navLinks = [
     { name: 'Home', href: '#home', id: 'home' },
     { name: 'Services', href: '#services', id: 'services' },
@@ -72,7 +74,7 @@ const Navbar: React.FC = () => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      const navbarHeight = 80; // Fixed h-20 height
+      const navbarHeight = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -91,16 +93,7 @@ const Navbar: React.FC = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 h-20 flex items-center transition-all duration-300 ${scrolled ? 'nav-glass shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto w-full px-4 flex justify-between items-center">
         {/* Brand/Logo */}
-        <div className="flex items-center gap-2 group cursor-pointer">
-          <a 
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Click to Message on WhatsApp"
-            className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg transition transform group-hover:scale-110 active:scale-95"
-          >
-            <i className="fab fa-whatsapp text-white text-xl"></i>
-          </a>
+        <div className="flex items-center">
           <a 
             href="#home" 
             onClick={(e) => handleLinkClick(e, 'home')}
@@ -130,7 +123,17 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Action Buttons & Mobile Toggle */}
-        <div className="flex items-center gap-3 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
+          {/* Call Link - Visible on large screens and above */}
+          <a 
+            href={telLink} 
+            className={`hidden lg:flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 dark:bg-blue-900/30 font-bold transition-all ${scrolled ? 'text-blue-600' : 'text-gray-900 dark:text-white'} hover:bg-blue-600 hover:text-white`}
+          >
+            <i className="fas fa-phone-alt"></i>
+            <span className="text-sm whitespace-nowrap">{phoneNumber}</span>
+          </a>
+
+          {/* Theme Toggle */}
           <button 
             onClick={toggleTheme}
             className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${scrolled ? 'hover:bg-gray-200 dark:hover:bg-gray-800' : 'hover:bg-white/10'} text-lg`}
@@ -139,6 +142,7 @@ const Navbar: React.FC = () => {
             <i className={`fas ${theme === 'dark' ? 'fa-sun text-yellow-400' : 'fa-moon text-blue-600'}`}></i>
           </button>
 
+          {/* WhatsApp Button */}
           <a 
             href={whatsappUrl}
             target="_blank"
@@ -146,10 +150,11 @@ const Navbar: React.FC = () => {
             className="hidden sm:flex bg-green-500 hover:bg-green-600 text-white px-5 lg:px-6 py-2.5 rounded-full font-bold items-center gap-2 transition shadow-lg transform hover:-translate-y-0.5 active:scale-95"
           >
             <i className="fab fa-whatsapp"></i>
-            <span className="hidden lg:inline">Book Now</span>
-            <span className="lg:hidden">Book</span>
+            <span className="hidden xl:inline">Book Now</span>
+            <span className="xl:hidden">Book</span>
           </a>
           
+          {/* Mobile Menu Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-700 dark:text-gray-300' : 'text-gray-900 dark:text-white'}`}
@@ -160,8 +165,15 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-xl transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-[450px] border-t border-gray-100 dark:border-gray-700' : 'max-h-0'}`}>
+      <div className={`md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-800 shadow-xl transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-[550px] border-t border-gray-100 dark:border-gray-700' : 'max-h-0'}`}>
         <div className="flex flex-col p-4 gap-2 font-bold text-gray-700 dark:text-gray-300 uppercase tracking-widest text-sm">
+          <a 
+            href={telLink}
+            className="p-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 flex items-center gap-3"
+          >
+            <i className="fas fa-phone-alt"></i>
+            Call Us: {phoneNumber}
+          </a>
           {navLinks.map((link) => (
             <a 
               key={link.id}
