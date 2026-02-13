@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { getDiagnosticResponse } from '../services/geminiService';
+import { getDiagnosticResponse, isAiEnabled } from '../services/geminiService';
 import { ChatMessage } from '../types';
 
 interface DiagnosticChatProps {
@@ -9,12 +9,20 @@ interface DiagnosticChatProps {
 }
 
 const DiagnosticChat: React.FC<DiagnosticChatProps> = ({ isOpen, onClose }) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', content: "Hi! I'm your CoolCare AI Diagnostic Assistant. Describe the problem with your appliance, and I'll help you troubleshoot it." }
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      const initialMsg = isAiEnabled() 
+        ? "Hi! I'm your CoolCare AI Diagnostic Assistant. Describe the problem with your appliance, and I'll help you troubleshoot it."
+        : "Hi! Our AI Diagnostic service is currently offline, but you can still reach our human experts 24/7 by calling +91 84337 80484.";
+      
+      setMessages([{ role: 'model', content: initialMsg }]);
+    }
+  }, [isOpen, messages.length]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -63,8 +71,10 @@ const DiagnosticChat: React.FC<DiagnosticChatProps> = ({ isOpen, onClose }) => {
               <i className="fas fa-robot text-xl"></i>
             </div>
             <div>
-              <h3 className="font-bold">AI Diagnostic Assistant</h3>
-              <p className="text-xs text-blue-100">Troubleshoot your appliance</p>
+              <h3 className="font-bold">Diagnostic Assistant</h3>
+              <p className="text-xs text-blue-100">
+                {isAiEnabled() ? 'AI Troubleshooting' : 'Human Support Channel'}
+              </p>
             </div>
           </div>
           <button onClick={onClose} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center transition" aria-label="Close Chat">
@@ -107,20 +117,24 @@ const DiagnosticChat: React.FC<DiagnosticChatProps> = ({ isOpen, onClose }) => {
             <input 
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Describe the issue..."
+              placeholder={isAiEnabled() ? "Describe the issue..." : "Chat is in offline mode..."}
+              disabled={!isAiEnabled() && messages.length > 1}
               className="flex-grow bg-transparent border-none focus:ring-0 text-sm px-3 py-2 outline-none text-black dark:text-white font-medium placeholder:text-gray-500 dark:placeholder:text-gray-400"
             />
             <button 
               type="submit"
-              disabled={isLoading || !input.trim()}
+              disabled={isLoading || !input.trim() || (!isAiEnabled() && messages.length > 1)}
               className="bg-blue-600 text-white w-10 h-10 rounded-xl flex items-center justify-center hover:bg-blue-700 disabled:opacity-50 transition shadow-md active:scale-95"
             >
               <i className="fas fa-paper-plane"></i>
             </button>
           </div>
-          <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center mt-3 font-medium uppercase tracking-wider">
-            Powered by Gemini AI Engine
-          </p>
+          <div className="flex items-center justify-center gap-2 mt-3">
+             <span className={`w-1.5 h-1.5 rounded-full ${isAiEnabled() ? 'bg-green-500 animate-pulse' : 'bg-orange-500'}`}></span>
+             <p className="text-[10px] text-gray-400 dark:text-gray-500 font-medium uppercase tracking-wider">
+               {isAiEnabled() ? 'Gemini AI Diagnostic Active' : 'AI Offline - Manual support only'}
+             </p>
+          </div>
         </form>
       </div>
     </div>
