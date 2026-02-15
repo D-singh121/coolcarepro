@@ -1,5 +1,5 @@
 
-export type ApplianceType = 'AC' | 'Washing Machine' | 'Fridge' | 'Cooler';
+export type ApplianceType = 'AC' | 'Washing Machine' | 'Fridge' | 'Microwave Oven';
 
 export interface ServiceItem {
   id: string;

@@ -28,7 +28,7 @@ export async function getDiagnosticResponse(prompt: string) {
       model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
-        systemInstruction: "You are an expert home appliance repair technician. Help the user diagnose their AC, washing machine, fridge, or cooler issues. Provide concise troubleshooting steps. Always advise them to book a professional service for complex repairs.",
+        systemInstruction: "You are an expert home appliance repair technician. Help the user diagnose their AC, washing machine, fridge, or microwave oven issues. Provide concise troubleshooting steps for things like magnetron failure, heating problems, or spinning issues. Always advise them to book a professional service for complex or high-voltage repairs.",
         temperature: 0.7,
       },
     });

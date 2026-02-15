@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
             <li><a href="#services" className="hover:text-blue-400 transition">AC Repair</a></li>
             <li><a href="#services" className="hover:text-blue-400 transition">Washing Machine</a></li>
             <li><a href="#services" className="hover:text-blue-400 transition">Fridge Service</a></li>
-            <li><a href="#services" className="hover:text-blue-400 transition">Cooler Maintenance</a></li>
+            <li><a href="#services" className="hover:text-blue-400 transition">Microwave Oven Repair</a></li>
           </ul>
         </div>
 

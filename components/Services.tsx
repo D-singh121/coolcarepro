@@ -29,11 +29,11 @@ const services: ServiceItem[] = [
   },
   {
     id: '4',
-    type: 'Cooler',
-    title: 'Air Cooler Solutions',
-    description: 'Pump replacement, cleaning, and motor maintenance for all types of coolers.',
-    icon: 'fas fa-wind',
-    image: 'https://images.unsplash.com/photo-1591147139223-844596e3d34d?auto=format&fit=crop&q=80&w=800'
+    type: 'Microwave Oven',
+    title: 'Microwave Oven Repair',
+    description: 'Magnetron replacement, heating issues, and touch panel repairs for all models.',
+    icon: 'fas fa-burn',
+    image: 'https://images.unsplash.com/photo-1585659722982-789630278249?auto=format&fit=crop&q=80&w=800'
   }
 ];
 
